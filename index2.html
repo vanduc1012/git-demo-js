@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="content"></div>
+    <!-- <button id="button1" value="1" onclick="result(1)">1</button>
+    <button id="button2" value="2" onclick="result(2)">2</button>
+    <button id="button3" value="3" onclick="result(3)">3</button>
+    <button id="button4" value="4" onclick="result(4)">4</button>
+    <button id="button5" value="5" onclick="result(5)">5</button>
+    <button id="button6" value="6" onclick="result(6)">6</button>
+    <button id="button7" value="7" onclick="result(7)">7</button>
+    <button id="button8" value="8" onclick="result(8)">8</button>
+    <button id="button9" value="9" onclick="result(9)">9</button>
+    <button id="button0" value="0" onclick="result(0)">0</button>-->
+    <br />
+    <br />
+    <button onclick="result('+')">+</button>
+    <button onclick="result('-')">-</button>
+    <button onclick="result('*')">*</button>
+    <button onclick="result('/')">/</button>
+    <button onclick="result('=')">=</button>
+    <br />
+    <h3>
+      Kết quả là:
+      <p id="ketqua">0</p>
+    </h3>
+  </body>
+  <script>
+    // var interTexts = "";
+    // for (var i = 0; i <= 9; i++) {
+    //   interTexts += '<button onclick="result(' + i + ')">' + i + "</button>";
+    // }
+    // document.getElementById("content").innerHTML = interTexts;
+    // var tong = 0;
+    // var a = 0;
+    // var dau = "";
+    // var b = 0;
+    // var dem = 0;
+    // function result(so) {
+    //   if (typeof so == "number") {
+    //     if (dau == "") {
+    //       a = a * 10 + so;
+    //       document.getElementById("ketqua").innerText = a;
+    //     } else {
+    //       b = b * 10 + so;
+    //       document.getElementById("ketqua").innerText = a + " " + dau + " " + b;
+    //     }
+    //   } else {
+    //     if (dau == "") {
+    //       dau = so;
+    //     }
+    //     if (dau == "+") {
+    //       a = a + b;
+    //     } else {
+    //       if (dau == "-") {
+    //         a = a - b;
+    //       } else {
+    //         if (dau == "*") {
+    //           if (b == 0 && dem == 0) {
+    //             b = 1;
+    //           }
+    //           a = a * b;
+    //         } else {
+    //           if (b == 0 && dem == 0) {
+    //             b = 1;
+    //           }
+    //           if (b == 0 && dem == 1) {
+    //             console.log("Lỗi");
+    //             document.getElementById("ketqua").innerText = "Lỗi";
+    //             a = 0;
+    //             dau = "";
+    //             b = 0;
+    //             dem = 0;
+    //             return;
+    //           }
+    //           a = a / b;
+    //         }
+    //       }
+    //     }
+    //     b = 0;
+    //     dau = so;
+    //     dem = 1;
+    //     document.getElementById("ketqua").innerText = a + " " + dau;
+    //   }
+    // }
+    var interTexts = "";
+      for (var i = 0; i <= 9; i++) {
+        interTexts += '<button onclick="result(' + i + ')">' + i + "</button>";
+      }
+      interTexts += '<button onclick="calculate()">=</button>';  // Thêm nút dấu bằng
+      document.getElementById("content").innerHTML = interTexts;
+
+      var tong = 0;
+      var a = 0;
+      var dau = "";
+      var b = 0;
+      var dem = 0;
+
+      function result(so) {
+        if (typeof so == "number") {
+          if (dau == "") {
+            a = a * 10 + so;
+            document.getElementById("ketqua").innerText = a;
+          } else {
+            b = b * 10 + so;
+            document.getElementById("ketqua").innerText = a + " " + dau + " " + b;
+          }
+        } else {
+          if (dau == "") {
+            dau = so;
+          }
+          if (dau == "+" || dau == "-" || dau == "*" || dau == "/") {
+            calculate(); // Gọi hàm tính toán khi người dùng chọn dấu
+          }
+          b = 0;
+          dau = so;
+          dem = 1;
+          document.getElementById("ketqua").innerText = a + " " + dau;
+        }
+      }
+
+      function calculate() {
+        if (dau != "" && b != 0) {
+          if (dau == "+") {
+            a = a + b;
+          } else if (dau == "-") {
+            a = a - b;
+          } else if (dau == "*") {
+            a = a * b;
+          } else if (dau == "/") {
+            if (b != 0) {
+              a = a / b;
+            } else {
+              console.log("Lỗi");
+              document.getElementById("ketqua").innerText = "Lỗi";
+              a = 0;
+              dau = "";
+              b = 0;
+              dem = 0;
+              return;
+            }
+          }
+
+          document.getElementById("ketqua").innerText = a;
+          b = 0;
+          dau = "";
+          dem = 0;
+        }
+      }
+
+  </script>
+</html>
